@@ -10,7 +10,7 @@ const errorMiddleware = require('./middlewares/error.middleware'); //middleware 
 app.use(express.json());
 
 app.use('/api/users', usersRoutes); 
-
+app.use('/api/orders', ordersRoutes);
 app.use(errorMiddleware);
 
 module.exports = app;
