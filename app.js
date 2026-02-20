@@ -12,6 +12,7 @@ app.use(express.json());
 app.use('/api/users', usersRoutes); 
 app.use('/api/orders', ordersRoutes);
 app.use('/api/products', productsRoutes);
+app.use('/api/reports', reportsRoutes);
 app.use(errorMiddleware);
 
 module.exports = app;
