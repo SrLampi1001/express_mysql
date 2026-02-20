@@ -1,5 +1,5 @@
 const db = require('../../config/db')
-// Basic CRUD get all orders, get user by id -> Not creating, updating or deleting orders for this assignment
+// Basic CRUD get all orders, get order by id -> Not creating, updating or deleting orders for this assignment
 exports.getAllOrders = async ()=>{
     const [rows] = await db.query('SELECT * FROM orders');
     return rows;
