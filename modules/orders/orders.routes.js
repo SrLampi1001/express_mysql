@@ -8,6 +8,8 @@ router.get('/', ordersController.getAllOrders);
 
 router.get('/:id', ordersController.getOrderById);
 router.get('/user/:userId', ordersController.getOrdersByUserId);
-router.get('/orderNumber/:orderNumber', ordersController.getOrdersByOrderNumber);
+router.get('/orderNumber/:orderNumber', ordersController.getOrderByOrderNumber);
+router.get('/withEmail', ordersController.getAllOrdersWithUserEmail);
+router.get('/countByStatus', ordersController.getCountOrdersByStatus);
 
 module.exports = router;

@@ -13,8 +13,18 @@ exports.getOrdersByUserId = async (userId)=>{
     if(orders.length === 0) throw new Error('No orders found for this user');
     return orders;
 }
-exports.getOrdersByOrderNumber = async (orderNumber)=>{
-    const order = await model.getOrdersByOrderNumber(orderNumber);
+exports.getOrderByOrderNumber = async (orderNumber)=>{
+    const order = await model.getOrderByOrderNumber(orderNumber);
     if(!order) throw new Error('Order not found');
     return order;
+}
+exports.getAllOrdersWithUserEmail = async (email)=>{
+    const orders = await model.getAllOrdersWithUserEmail(email);
+    if(orders.length === 0) throw new Error('No orders found for this user');
+    return orders;
+}
+exports.getCountOrdersByStatus = async ()=>{
+    const count = await model.getCountOrdersByStatus();
+    if(count.length === 0) throw new Error('No orders found');
+    return count;
 }

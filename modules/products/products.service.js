@@ -18,3 +18,23 @@ exports.getProductsByCategoryId = async (categoryId)=>{
     if(products.length === 0) throw new Error('No products found for this category');
     return products;
 }
+exports.getProductsNameAndCategoryName = async ()=>{
+    const products = await model.getProductsNameAndCategoryName();
+    if(products.length === 0) throw new Error('No products found');
+    return products;
+}
+exports.getProductsByCategoryName = async (categoryName)=>{
+    const products = await model.getProductsByCategoryName(categoryName);
+    if(products.length === 0) throw new Error('No products found for this category name');
+    return products;
+}
+exports.getElectronicProducts = async ()=>{
+    const products = await model.getElectronicProducts();
+    if(products.length === 0) throw new Error('No electronic products found');
+    return products;
+}
+exports.getProductsByOrderNumber = async (orderNumber)=>{
+    const products = await model.getProductsByOrderNumber(orderNumber);
+    if(products.length === 0) throw new Error('No products found for this order number');
+    return products;
+}

@@ -9,5 +9,9 @@ router.get('/', usersController.getAllUsers);
 
 router.get('/:id', usersController.getUserById);
 router.get('/email/:email', usersController.getUserByEmail);
+router.get('/nameEmailOrders/:id', usersController.getUserNameEmailAndOrdersNumber);
+router.get('/noOrders', usersController.getUsersWithNoOrders);
+router.get('/totalMoneySpent/:id', usersController.getTotalMoneySpentByUser);
+router.get('/cityWithOrders/:city', usersController.getUsersFromCityWithOrders);
 
 module.exports = router;

@@ -1,5 +1,5 @@
 const db = require('../../config/db')
-// Basic CRUD get all products, get product by id -> Not creating, updating or deleting products for this assignment
+// Level 1 Assignment
 exports.getAvgUsersOrderValue = async () => {
     const [rows] = await db.query(`
         SELECT u.name, AVG(total) AS avg_order_value, COUNT(o.id) AS total_orders

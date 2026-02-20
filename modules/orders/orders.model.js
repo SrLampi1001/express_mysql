@@ -12,7 +12,25 @@ exports.getOrdersByUserId = async (userId)=>{
     const [rows] = await db.query('SELECT * FROM orders WHERE user_id = ?', [userId]);
     return rows; // Return all orders for the user (or an empty array if not found)
 }
-exports.getOrdersByOrderNumber = async (orderNumber)=>{
+exports.getOrderByOrderNumber = async (orderNumber)=>{
     const [rows] = await db.query('SELECT * FROM orders WHERE order_number = ?', [orderNumber]);
     return rows[0]; // Return the first order found (or undefined if not found)
+}
+// Level 1 Assignment
+exports.getAllOrdersWithUserEmail = async (email)=>{
+    const [rows] = await db.query(`
+        SELECT o.order_number, o.order_date, u.email 
+        FROM orders o
+        INNER JOIN users u ON o.user_id = u.id
+        WHERE u.email = ?
+    `, [email]);
+    return rows; // Return all orders with user email (or an empty array if not found)
+}
+exports.getCountOrdersByStatus = async ()=>{
+    const [rows] = await db.query(`
+        SELECT status, COUNT(*) AS count
+        FROM orders
+        GROUP BY status
+    `);
+    return rows; // Return the count of orders by status (or an empty array if not found)
 }

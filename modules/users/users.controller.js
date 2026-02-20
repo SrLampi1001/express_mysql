@@ -26,3 +26,38 @@ exports.getUserByEmail = async (req, res, next) => {
     next(error);
   }
 };
+exports.getUserNameEmailAndOrdersNumber = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const user = await service.getUserNameEmailAndOrdersNumber(id);
+    res.json(user);
+  } catch (error) {
+    next(error);
+  }
+};
+exports.getUsersWithNoOrders = async (req, res, next) => {
+  try {
+    const users = await service.getUsersWithNoOrders();
+    res.json(users);
+  } catch (error) {
+    next(error);
+  }
+};
+exports.getTotalMoneySpentByUser = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const user = await service.getTotalMoneySpentByUser(id);
+    res.json(user);
+  } catch (error) {
+    next(error);
+  }
+};
+exports.getUsersFromCityWithOrders = async (req, res, next) => {
+  try {
+    const { city } = req.params;
+    const users = await service.getUsersFromCityWithOrders(city);
+    res.json(users);
+  } catch (error) {
+    next(error);
+  }
+};

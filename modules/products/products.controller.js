@@ -34,3 +34,37 @@ exports.getProductsByCategoryId = async (req, res, next)=>{
         next(error);
     }
 }
+exports.getProductsNameAndCategoryName = async (req, res, next)=>{
+    try {
+        const products = await service.getProductsNameAndCategoryName();
+        res.json(products);
+    } catch (error) {
+        next(error);
+    }
+}
+exports.getProductsByCategoryName = async (req, res, next)=>{
+    try {
+        const { categoryName } = req.params;
+        const products = await service.getProductsByCategoryName(categoryName);
+        res.json(products);
+    } catch (error) {
+        next(error);
+    }
+}
+exports.getElectronicProducts = async (req, res, next)=>{
+    try {
+        const products = await service.getElectronicProducts();
+        res.json(products);
+    } catch (error) {
+        next(error);
+    }
+}
+exports.getProductsByOrderNumber = async (req, res, next)=>{
+    try {
+        const { orderNumber } = req.params;
+        const products = await service.getProductsByOrderNumber(orderNumber);
+        res.json(products);
+    } catch (error) {
+        next(error);
+    }
+}

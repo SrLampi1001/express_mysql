@@ -25,11 +25,28 @@ exports.getOrdersByUserId = async (req, res, next) => {
     next(error);
   }
 };
-exports.getOrdersByOrderNumber = async (req, res, next) => {
+exports.getOrderByOrderNumber = async (req, res, next) => {
   try {
     const { orderNumber } = req.params;
-    const order = await service.getOrdersByOrderNumber(orderNumber);
+    const order = await service.getOrderByOrderNumber(orderNumber);
     res.json(order);
+  } catch (error) {
+    next(error);
+  }
+};
+exports.getAllOrdersWithUserEmail = async (req, res, next) => {
+  try {
+    const { email } = req.query; // Get the email from query parameters
+    const orders = await service.getAllOrdersWithUserEmail(email);
+    res.json(orders);
+  } catch (error) {
+    next(error);
+  }
+};
+exports.getCountOrdersByStatus = async (req, res, next) => {
+  try {
+    const count = await service.getCountOrdersByStatus();
+    res.json(count);
   } catch (error) {
     next(error);
   }
