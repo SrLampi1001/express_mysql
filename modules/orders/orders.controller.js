@@ -1,7 +1,7 @@
-const ordersService = require('./orders.service'); // Import the service layer for orders
+const service = require('./orders.service'); // Import the service layer for orders
 exports.getAllOrders = async (req, res, next) => {
   try {
-    const orders = await ordersService.getAllOrders(); // Call the service to get all orders
+    const orders = await service.getAllOrders(); // Call the service to get all orders
     res.json(orders); // Send the orders as a JSON response
   } catch (error) {
     next(error); // Pass any errors to the error handling middleware
@@ -10,7 +10,7 @@ exports.getAllOrders = async (req, res, next) => {
 exports.getOrderById = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const order = await ordersService.getOrderById(id);
+    const order = await service.getOrderById(id);
     res.json(order);
   } catch (error) {
     next(error);
@@ -19,7 +19,7 @@ exports.getOrderById = async (req, res, next) => {
 exports.getOrdersByUserId = async (req, res, next) => {
   try {
     const { userId } = req.params;
-    const orders = await ordersService.getOrdersByUserId(userId);
+    const orders = await service.getOrdersByUserId(userId);
     res.json(orders);
   } catch (error) {
     next(error);
@@ -28,7 +28,7 @@ exports.getOrdersByUserId = async (req, res, next) => {
 exports.getOrdersByOrderNumber = async (req, res, next) => {
   try {
     const { orderNumber } = req.params;
-    const order = await ordersService.getOrdersByOrderNumber(orderNumber);
+    const order = await service.getOrdersByOrderNumber(orderNumber);
     res.json(order);
   } catch (error) {
     next(error);
