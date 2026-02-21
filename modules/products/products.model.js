@@ -56,3 +56,39 @@ exports.getProductsByOrderNumber = async (orderNumber)=>{
     `, [orderNumber]);
     return rows; // Return all products found for the order number (or an empty array if not found)
 }
+//Level 2 Assignment
+exports.getProductsFromUserByName = async (userName)=>{
+    const [rows] = await db.query(`
+        SELECT u.name AS user_name, DISTINCT p.name AS product_name, 
+        FROM users u
+        INNER JOIN orders o ON u.id = o.user_id
+        INNER JOIN order_product op ON o.id = op.order_id
+        INNER JOIN products p ON op.product_id = p.id
+        WHERE u.name LIKE ?
+        ORDER BY user_name ASC
+    `, [`%${userName}%`]);
+    return rows; // Return all products found for the user name (or an empty array if not found)
+}
+exports.getProductsLastSaleDate = async ()=>{
+    const [rows] = await db.query(`
+        SELECT p.name AS product_name, MAX(op.created_at) AS last_sale_date
+        FROM products p
+        INNER JOIN order_product op ON p.id = op.product_id
+        INNER JOIN orders o ON op.order_id = o.id
+        GROUP BY p.id, p.name
+        ORDER BY last_sale_date DESC
+    `);
+    return rows; // Return the last sale date for all products (or an empty array if not found)
+}
+exports.getProductLastSaleDate = async (productId)=>{
+        const [rows] = await db.query(`
+        SELECT p.name AS product_name, MAX(op.created_at) AS last_sale_date
+        FROM products p
+        INNER JOIN order_product op ON p.id = op.product_id
+        INNER JOIN orders o ON op.order_id = o.id
+        WHERE p.id = ?
+        GROUP BY p.id, p.name
+        ORDER BY last_sale_date DESC
+    `, [productId]);
+    return rows[0]; // Return the last sale date for the product (or undefined if not found)
+}

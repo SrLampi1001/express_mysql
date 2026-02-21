@@ -18,6 +18,7 @@ exports.getOrderByOrderNumber = async (orderNumber)=>{
     if(!order) throw new Error('Order not found');
     return order;
 }
+//Level 1 Assignment
 exports.getAllOrdersWithUserEmail = async (email)=>{
     const orders = await model.getAllOrdersWithUserEmail(email);
     if(orders.length === 0) throw new Error('No orders found for this user');
@@ -27,4 +28,20 @@ exports.getCountOrdersByStatus = async ()=>{
     const count = await model.getCountOrdersByStatus();
     if(count.length === 0) throw new Error('No orders found');
     return count;
+}
+//Level 2 Assignment
+exports.getOrdersReceipt = async ()=>{
+    const receipts = await model.getOrdersReceipt();
+    if(receipts.length === 0) throw new Error("No orders found")
+    return receipts
+}
+exports.getOrderReceipt = async (id)=>{
+    const receipt = await model.getOrderReceipt(id);
+    if(!receipt) throw new Error("Order not found")
+    return receipt;
+}
+exports.getProductsFromCancelledOrders = async ()=>{
+    const products = await model.getProductsFromCancelledOrders();
+    if(products.length === 0) throw new Error("No cancelled orders found")
+    return products;
 }

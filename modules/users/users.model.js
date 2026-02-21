@@ -52,3 +52,37 @@ exports.getUsersFromCityWithOrders = async (city) => {
     `, [city]);
     return rows; // Return all users from the city with orders (or an empty array if not found)
 }
+//Level 2 Assignment
+exports.getUsersWithGamerProducts = async () => {
+    const [rows] = await db.query(`
+        SELECT DISTINCT u.name
+        FROM users u
+        INNER JOIN orders o ON u.id = o.user_id
+        INNER JOIN order_product op ON o.id = op.order_id
+        INNER JOIN products p ON op.product_id = p.id
+        WHERE p.name LIKE '%gamer%'
+        ORDER BY u.name ASC
+    `);
+    return rows; // Return all users with gamer products (or an empty array if not found)
+}
+exports.getUsersAverageOrderValue = async () => {
+    const [rows] = await db.query(`
+        SELECT u.name, AVG(o.total) AS avg_order_value
+        FROM users u
+        INNER JOIN orders o ON u.id = o.user_id
+        GROUP BY u.id, u.name
+        ORDER BY avg_order_value DESC
+    `);
+    return rows; // Return the average order value for each user (or an empty array if not found)
+}
+exports.getUserAverageOrderValue = async (id) => {
+    const [rows] = await db.query(`
+        SELECT u.name, AVG(o.total) AS avg_order_value
+        FROM users u
+        INNER JOIN orders o ON u.id = o.user_id
+        WHERE u.id = ?
+        GROUP BY u.id, u.name
+        ORDER BY avg_order_value DESC
+    `, [id]);
+    return rows[0]; // Return the average order value for the user (or undefined if not found)
+}

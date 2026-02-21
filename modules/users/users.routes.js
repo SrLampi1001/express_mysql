@@ -9,9 +9,14 @@ router.get('/', usersController.getAllUsers);
 
 router.get('/:id', usersController.getUserById);
 router.get('/email/:email', usersController.getUserByEmail);
+//Level 1 Assignment
 router.get('/nameEmailOrders/:id', usersController.getUserNameEmailAndOrdersNumber);
 router.get('/noOrders', usersController.getUsersWithNoOrders);
 router.get('/totalMoneySpent/:id', usersController.getTotalMoneySpentByUser);
 router.get('/cityWithOrders/:city', usersController.getUsersFromCityWithOrders);
+//Level 2 Assignment
+router.get('/gamerProducts', usersController.getUsersWithGamerProducts); //This route will return all users that have at least one product with "Gamer" in its name in their orders, currently it returns nothing
+router.get('/averageOrderValue', usersController.getUsersAverageOrderValue); 
+router.get('/averageOrderValue/:id', usersController.getUserAverageOrderValue);
 
 module.exports = router;

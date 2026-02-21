@@ -68,3 +68,30 @@ exports.getProductsByOrderNumber = async (req, res, next)=>{
         next(error);
     }
 }
+//Level 3 Assignment
+exports.getProductsFromUserByName = async (req, res, next)=>{
+    try{
+        const { userName } = req.params;
+        const products = await service.getProductsFromUserByName(userName);
+        res.json(products);
+    } catch (error){
+        next(error)
+    }
+}
+exports.getProductsLastSaleDate = async (req, res, next)=>{
+    try{
+        const products = await service.getProductsLastSaleDate();
+        res.json(products);
+    } catch (error){
+        next(error);
+    }
+}
+exports.getProductLastSaleDate = async (req, res, next)=>{
+    try{
+        const { productId } = req.params;
+        const product = await service.getProductLastSaleDate(productId);
+        res.json(product);
+    } catch (error){
+        next(error);
+    }
+}
