@@ -34,6 +34,7 @@ exports.getOrderByOrderNumber = async (req, res, next) => {
     next(error);
   }
 };
+//Level 1 Assignment
 exports.getAllOrdersWithUserEmail = async (req, res, next) => {
   try {
     const { email } = req.query; // Get the email from query parameters
@@ -51,3 +52,21 @@ exports.getCountOrdersByStatus = async (req, res, next) => {
     next(error);
   }
 };
+//Level 2 Assignment
+exports.getOrdersReceipt = async (req, res, next)=>{
+  try{
+    const receipts = await service.getOrdersReceipt();
+    res.json(receipts);
+  } catch(error){
+    next(error);
+  }
+};
+exports.getOrderReceipt = async (req, res, next)=>{
+  try{
+    const {id} = req.query; //Get the id from query parameters
+    const receipt = await service.getOrderReceipt(id);
+    res.json(receipt)
+  } catch(error){
+    next(error)
+  }
+}
