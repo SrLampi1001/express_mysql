@@ -56,3 +56,14 @@ exports.getOrderReceipt = async (id)=>{
     `, [id]);
     return rows[0]; //Return the first order found (or undefined if not found)
 }
+exports.getProductsFromCancelledOrders = async ()=>{
+    const [rows] = await db.query(`
+        SELECT DISTINCT p.name AS Product_name, o.order_number AS Order_number, o.status AS Order_status
+        FROM products p
+        INNER JOIN order_product op ON p.id = op.product_id
+        INNER JOIN orders o ON op.order_id = o.id
+        WHERE o.status = 'cancelled'
+        ORDER BY Product_name ASC;
+    `);
+    return rows; // Return all products from cancelled orders (or an empty array if not found)
+}

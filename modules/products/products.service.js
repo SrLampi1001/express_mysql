@@ -38,3 +38,19 @@ exports.getProductsByOrderNumber = async (orderNumber)=>{
     if(products.length === 0) throw new Error('No products found for this order number');
     return products;
 }
+//Level 2 Assignment
+exports.getProductsFromUserByName = async (userName)=>{
+    const products = await model.getProductsFromUserByName(userName);
+    if(products.length === 0) throw new Error('No products found for this user name');
+    return products;
+}
+exports.getProductsLastSaleDate = async ()=>{
+    const product = await model.getProductsLastSaleDate();
+    if(!product) throw new Error('No products found');
+    return product;
+}
+exports.getProductLastSaleDate = async (productId)=>{
+    const product = await model.getProductLastSaleDate(productId);
+    if(!product) throw new Error('No product found with this id');
+    return product;
+}

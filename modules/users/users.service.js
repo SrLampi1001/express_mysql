@@ -13,6 +13,7 @@ exports.getUserByEmail = async (email)=>{
     if(!user) throw new Error('User not found'); // If no user is found, throw an error to be handled by the error middleware
     return user;
 }
+//Level 1 Assignment
 exports.getUserNameEmailAndOrdersNumber = async (id)=>{
     const user = await model.getUserNameEmailAndOrdersNumber(id);
     if(!user) throw new Error('User not found');
@@ -32,4 +33,20 @@ exports.getUsersFromCityWithOrders = async (city)=>{
     const users = await model.getUsersFromCityWithOrders(city);
     if(users.length === 0) throw new Error('No users found from this city with orders');
     return users;
+}
+//Level 2 Assignment
+exports.getUsersWithGamerProducts = async ()=>{
+    const users = await model.getUsersWithGamerProducts();
+    if(users.length === 0) throw new Error('No users found with gamer products');
+    return users;
+}
+exports.getUsersAverageOrderValue = async ()=>{
+    const users = await model.getUsersAverageOrderValue();
+    if(users.length === 0) throw new Error('No users found');
+    return users;
+}
+exports.getUserAverageOrderValue = async (id)=>{
+    const user = await model.getUserAverageOrderValue(id);
+    if(!user) throw new Error('User not found');
+    return user;
 }

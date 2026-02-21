@@ -7,7 +7,7 @@ exports.getAllUsers = async (req, res, next) => {
   } catch (error) {
     next(error); // Pass any errors to the error handling middleware
   }
-};
+}
 exports.getUserById = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -16,7 +16,7 @@ exports.getUserById = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-};
+}
 exports.getUserByEmail = async (req, res, next) => {
   try {
     const { email } = req.params;
@@ -25,7 +25,8 @@ exports.getUserByEmail = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-};
+}
+//Level 1 Assignment
 exports.getUserNameEmailAndOrdersNumber = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -34,7 +35,7 @@ exports.getUserNameEmailAndOrdersNumber = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-};
+}
 exports.getUsersWithNoOrders = async (req, res, next) => {
   try {
     const users = await service.getUsersWithNoOrders();
@@ -42,7 +43,7 @@ exports.getUsersWithNoOrders = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-};
+}
 exports.getTotalMoneySpentByUser = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -51,7 +52,7 @@ exports.getTotalMoneySpentByUser = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-};
+}
 exports.getUsersFromCityWithOrders = async (req, res, next) => {
   try {
     const { city } = req.params;
@@ -60,4 +61,30 @@ exports.getUsersFromCityWithOrders = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-};
+}
+//Level 2 Assignment
+exports.getUsersWithGamerProducts = async (req, res, next) => {
+    try {
+      const users = await service.getUsersWithGamerProducts();
+      res.json(users);
+    } catch (error) {
+      next(error);
+    }
+}
+exports.getUsersAverageOrderValue = async (req, res, next) => {
+    try {
+      const users = await service.getUsersAverageOrderValue();
+      res.json(users);
+    } catch (error) {
+      next(error);
+    }
+}
+exports.getUserAverageOrderValue = async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const user = await service.getUserAverageOrderValue(id);
+      res.json(user);
+    } catch (error) {
+      next(error);
+    }
+}

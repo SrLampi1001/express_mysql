@@ -18,5 +18,35 @@ exports.getCategoriesTotalRevenue = async (req, res, next)=>{
     }
 }
 exports.getCategoryTotalRevenue = async (req, res, next)=>{
-    
+    try{
+        const {categoryId} = req.params;
+        const revenue = await service.getCategoryTotalRevenue(categoryId);
+        res.json(revenue)
+    } catch (error){
+        next(error);
+    }
+}
+exports.getFiveBestSellingProducts = async (req, res, next)=>{
+    try{
+        const products = await service.getFiveBestSellingProducts();
+        res.json(products);   
+    } catch (error) {
+        next(error);
+    }
+}
+exports.getDailyRevenue = async (req, res, next)=>{
+    try{
+        const revenue = await service.getDailyRevenue();
+        res.json(revenue);
+    } catch (error) {
+        next(error);
+    }
+}
+exports.getCategoriesWithNoSales = async (req, res, next)=>{
+    try{
+        const categories = await service.getCategoriesWithNoSales();
+        res.json(categories);
+    } catch (error) {
+        next(error);
+    }
 }

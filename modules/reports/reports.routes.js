@@ -8,5 +8,9 @@ router.use(reportsLoggerMiddleware);
 router.get('/avg-users-order-value', reportsController.getAvgUsersOrderValue);
 //Level 2 Assignment
 router.get('/category-revenues', reportsController.getCategoriesTotalRevenue)
+router.get('/category-revenues/:categoryId', reportsController.getCategoryTotalRevenue)
+router.get('/five-best-selling-products', reportsController.getFiveBestSellingProducts)
+router.get('/daily-revenue', reportsController.getDailyRevenue)
+router.get('/categories-with-no-sales', reportsController.getCategoriesWithNoSales) //This route will return all categories that have no sales, currently it returns nothing because all categories have sales
 
 module.exports = router;

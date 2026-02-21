@@ -40,3 +40,8 @@ exports.getOrderReceipt = async (id)=>{
     if(!receipt) throw new Error("Order not found")
     return receipt;
 }
+exports.getProductsFromCancelledOrders = async ()=>{
+    const products = await model.getProductsFromCancelledOrders();
+    if(products.length === 0) throw new Error("No cancelled orders found")
+    return products;
+}

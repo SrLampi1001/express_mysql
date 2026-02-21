@@ -33,3 +33,35 @@ exports.getCategoryTotalRevenue = async (category_id) => {
     `, [category_id]);
     return rows[0]; //Return the first category (or undefined if not found)
 }
+exports.getFiveBestSellingProducts = async () => {
+    const [rows] = await db.query(`
+        SELECT p.name, SUM(op.quantity) AS total_sold
+        FROM products p
+        INNER JOIN order_product op ON p.id = op.product_id
+        GROUP BY p.id, p.name
+        ORDER BY total_sold DESC
+        LIMIT 5;
+    `);
+    return rows; // Return the five best-selling products (or an empty array if not found)
+}
+exports.getDailyRevenue = async () => {
+    const [rows] = await db.query(`
+        SELECT DATE(o.created_at) AS date, SUM(o.total) AS daily_revenue
+        FROM orders o
+        GROUP BY DATE(o.created_at)
+        ORDER BY date ASC;
+    `);
+    return rows; // Return the daily revenue (or an empty array if not found)
+}
+exports.getCategoriesWithNoSales = async () => {
+    const [rows] = await db.query(`
+        SELECT c.name AS Category_name
+        FROM categories c
+        LEFT JOIN products p ON p.category_id = c.id
+        LEFT JOIN order_product op ON op.product_id = p.id
+        WHERE op.id IS NULL
+        GROUP BY c.id, c.name
+        ORDER BY c.name ASC;
+    `);
+    return rows; // Return all categories with no sales (or an empty array if not found)
+}

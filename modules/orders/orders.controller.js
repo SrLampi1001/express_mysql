@@ -70,3 +70,11 @@ exports.getOrderReceipt = async (req, res, next)=>{
     next(error)
   }
 }
+exports.getProductsFromCancelledOrders = async (req, res, next)=>{
+    try{
+        const products = await service.getProductsFromCancelledOrders();
+        res.json(products);
+    } catch (error) {
+        next(error);
+    }
+}

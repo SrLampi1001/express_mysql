@@ -10,3 +10,23 @@ exports.getCategoriesTotalRevenue = async ()=> {
     if(revenues.length === 0)throw new Error("No Categories found")
     return revenues;
 }
+exports.getCategoryTotalRevenue = async (categoryId) => {
+    const revenue = await model.getCategoryTotalRevenue(categoryId);
+    if(revenue.length === 0)throw new Error("No Category found with the given id")
+    return revenue[0];
+}
+exports.getFiveBestSellingProducts = async () => {
+    const products = await model.getFiveBestSellingProducts();
+    if(products.length === 0) throw new Error("No products found");
+    return products;
+}
+exports.getDailyRevenue = async () => {
+    const revenue = await model.getDailyRevenue();
+    if(revenue.length === 0) throw new Error("No revenue data found");
+    return revenue;
+}
+exports.getCategoriesWithNoSales = async () => {
+    const categories = await model.getCategoriesWithNoSales();
+    if(categories.length === 0) throw new Error("No categories found with no sales");
+    return categories;
+}
