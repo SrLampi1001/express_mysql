@@ -92,3 +92,37 @@ exports.getProductLastSaleDate = async (productId)=>{
     `, [productId]);
     return rows[0]; // Return the last sale date for the product (or undefined if not found)
 }
+//Level 3 Assignment
+exports.getProductsWIthNoSales = async ()=>{
+    const [rows] = await db.query(`
+        SELECT p.name AS product_name
+        FROM products p
+        LEFT JOIN order_product op ON p.id = op.product_id
+        WHERE op.product_id IS NULL
+        ORDER BY product_name ASC
+    `);
+    return rows; // Return all products with no sales (or an empty array if not found)
+}
+exports.getProductsSoldCheaperThanCurrentPrice = async ()=>{
+    const [rows] = await db.query(`
+        SELECT p.name, p.sale_price AS current_price, op.price_at_purchase AS sold_price, o.order_date AS sale_date 
+        FROM products p 
+        INNER JOIN order_product op ON op.product_id = p.id 
+        INNER JOIN orders o ON o.id = op.order_id 
+        WHERE op.price_at_purchase < p.sale_price 
+        ORDER BY p.name, o.order_date DESC;
+        `);
+    return rows; // Return all products that have been sold cheaper than their current price (or an empty array if not found)
+}
+exports.getProductBuyers = async (productId)=>{
+    const [rows] = await db.query(`
+        SELECT u.name AS buyer_name, u.email AS buyer_email, op.price_at_purchase AS purchase_price, op.quantity AS purchase_quantity, o.order_date AS purchase_date
+        FROM products p 
+        INNER JOIN order_product op ON p.id = op.product_id
+        INNER JOIN orders o ON op.order_id = o.id
+        INNER JOIN users u ON o.user_id = u.id
+        WHERE p.id = ?
+        ORDER BY o.order_date DESC;
+    `, [productId]);
+    return rows; // Return all buyers of the product (or an empty array if not found)
+}

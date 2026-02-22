@@ -12,5 +12,11 @@ router.get('/category-revenues/:categoryId', reportsController.getCategoryTotalR
 router.get('/five-best-selling-products', reportsController.getFiveBestSellingProducts)
 router.get('/daily-revenue', reportsController.getDailyRevenue)
 router.get('/categories-with-no-sales', reportsController.getCategoriesWithNoSales) //This route will return all categories that have no sales, currently it returns nothing because all categories have sales
+//Level 3 Assignment
+router.get('/global-reports', reportsController.getGlobalReports)
+router.get('/cities-revenue-clothes-category', reportsController.getCitiesRevenueFromClothesCategory)
+router.get('/city-revenue-clothes-category/:city', reportsController.getCityRevenueFromClothesCategory)
+router.get('/total-profit', reportsController.getTotalProfit)
+router.get('/three-most-profitable-cities', reportsController.getThreeMostProfitableCities)
 
 module.exports = router;

@@ -30,3 +30,29 @@ exports.getCategoriesWithNoSales = async () => {
     if(categories.length === 0) throw new Error("No categories found with no sales");
     return categories;
 }
+//Level 3 Assignment
+exports.getGlobalReports = async () => {
+    const reports = await model.getGlobalReports();
+    if(reports.length === 0) throw new Error("No reports found");
+    return reports;
+}
+exports.getCitiesRevenueFromClothesCategory = async () => {
+    const revenues = await model.getCitiesRevenueFromClothesCategory();
+    if(revenues.length === 0) throw new Error("No revenue data found for clothes category");
+    return revenues;
+}
+exports.getCityRevenueFromClothesCategory = async (city) => {
+    const revenue = await model.getCityRevenueFromClothesCategory(city);
+    if(revenue.length === 0) throw new Error("No revenue data found for clothes category in this city");
+    return revenue[0];
+}
+exports.getTotalProfit = async () => {
+    const profit = await model.getTotalProfit();
+    if(profit.length === 0) throw new Error("No profit data found");
+    return profit[0];
+}
+exports.getThreeMostProfitableCities = async () => {
+    const cities = await model.getThreeMostProfitableCities();
+    if(cities.length === 0) throw new Error("No profit data found for cities");
+    return cities;
+}

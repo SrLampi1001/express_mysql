@@ -67,3 +67,17 @@ exports.getProductsFromCancelledOrders = async ()=>{
     `);
     return rows; // Return all products from cancelled orders (or an empty array if not found)
 }
+//Level 3 Assignment
+exports.getOrderWithMostProductVariety = async ()=>{
+    const [rows] = await db.query(`
+        SELECT u.name AS user_name, o.order_number, COUNT(DISTINCT p.id) AS product_variety
+        FROM orders o
+        INNER JOIN order_product op ON o.id = op.order_id
+        INNER JOIN products p ON op.product_id = p.id
+        INNER JOIN users u ON o.user_id = u.id
+        GROUP BY o.id, u.name, o.order_number
+        ORDER BY product_variety DESC
+        LIMIT 1;
+    `);
+    return rows[0]; // Return the order with most product variety (or undefined if not found)
+}

@@ -72,9 +72,18 @@ exports.getOrderReceipt = async (req, res, next)=>{
 }
 exports.getProductsFromCancelledOrders = async (req, res, next)=>{
     try{
-        const products = await service.getProductsFromCancelledOrders();
-        res.json(products);
+      const products = await service.getProductsFromCancelledOrders();
+      res.json(products);
     } catch (error) {
-        next(error);
+      next(error);
+    }
+}
+//Level 3 Assignment
+exports.getOrderWithMostProductVariety = async (req, res, next)=>{
+    try{
+      const order = await service.getOrderWithMostProductVariety();
+      res.json(order);
+    } catch (error) {
+      next(error);
     }
 }

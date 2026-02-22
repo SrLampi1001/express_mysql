@@ -88,3 +88,20 @@ exports.getUserAverageOrderValue = async (req, res, next) => {
       next(error);
     }
 }
+//Level 3 Assignment
+exports.getYearBestCustomer = async (req, res, next) => {
+    try {
+      const user = await service.getYearBestCustomer();
+      res.json(user);
+    } catch (error) {
+      next(error);
+    }
+}
+exports.getUsersWithGamingProductsButNoHomeProducts = async (req, res, next) => {
+    try {
+      const users = await service.getUsersWithGamingProductsButNoHomeProducts();
+      res.json(users);
+    } catch (error) {
+      next(error);
+    }
+}

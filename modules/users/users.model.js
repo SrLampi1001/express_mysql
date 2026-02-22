@@ -86,3 +86,36 @@ exports.getUserAverageOrderValue = async (id) => {
     `, [id]);
     return rows[0]; // Return the average order value for the user (or undefined if not found)
 }
+//Level 3 Assignment
+exports.getYearBestCustomer = async () => {
+    const [rows] = await db.query(`
+        SELECT u.name, u.email, SUM(o.total) AS total_spent
+        FROM users u
+        INNER JOIN orders o ON u.id = o.user_id
+        WHERE YEAR(o.created_at) = YEAR(CURDATE())
+        GROUP BY u.id, u.name, u.email
+        ORDER BY total_spent DESC
+        LIMIT 1;
+    `);
+    return rows[0]; // Return the best customer of the year (or undefined if not found)
+}
+exports.getUsersWithGamingProductsButNoHomeProducts = async () => {
+    const [rows] = await db.query(`
+        SELECT DISTINCT u.name, u.email, c.name AS Category 
+        FROM users u 
+        INNER JOIN orders o ON o.user_id = u.id 
+        INNER JOIN order_product op ON op.order_id = o.id 
+        INNER JOIN products p ON p.id = op.product_id 
+        INNER JOIN categories c ON c.id = p.category_id 
+        WHERE c.id = 4 AND u.id NOT IN -- Assuming category id 4 corresponds to gaming products 
+        (SELECT u2.id 
+        FROM users u2 
+        INNER JOIN orders o2 ON o2.user_id = u2.id 
+        INNER JOIN order_product op2 ON op2.order_id = o2.id 
+        INNER JOIN products p2 ON p2.id = op2.product_id 
+        INNER JOIN categories c2 ON c2.id = p2.category_id 
+        WHERE c2.id = 7) -- Assuming category id 7 corresponds to home products
+        ORDER BY u.name ASC;`
+    );
+    return rows; // Return all users with gaming products but no home products (or an empty array if not found)
+}
