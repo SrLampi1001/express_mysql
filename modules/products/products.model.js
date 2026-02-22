@@ -126,3 +126,30 @@ exports.getProductBuyers = async (productId)=>{
     `, [productId]);
     return rows; // Return all buyers of the product (or an empty array if not found)
 }
+    //Level 4 Assignment
+exports.getStairProducts = async ()=>{
+    const [rows] = await db.query(`
+        SELECT p.name, pr.product_revenue as Product_revenue, (pr.product_revenue / company_revenue)*100 AS percentage
+        FROM
+        (SELECT SUM(op.price_at_purchase * op.quantity) as product_revenue, op.product_id as product_id FROM order_product op GROUP BY op.product_id) AS pr
+        INNER JOIN 
+        (SELECT SUM(op.price_at_purchase * op.quantity) AS company_revenue
+                FROM order_product op) AS company
+        INNER JOIN products p ON product_id = p.id
+        WHERE (pr.product_revenue / company_revenue)*100 > 2
+    `);
+    return rows; // Return all products that have generated more than 2% of the total revenue (or an empty array if not found)
+}
+exports.getMostPairedProducts = async ()=>{
+    const [rows] = await db.query(`
+        SELECT p1.name AS product_1, p2.name AS product_2, COUNT(*) AS times_together 
+        FROM order_product op1 
+        INNER JOIN order_product op2 ON op1.order_id = op2.order_id AND op1.product_id < op2.product_id 
+        INNER JOIN products p1 ON p1.id = op1.product_id 
+        INNER JOIN products p2 ON p2.id = op2.product_id 
+        GROUP BY p1.id, p1.name, p2.id, p2.name 
+        ORDER BY times_together 
+        DESC LIMIT 10;
+    `);
+    return rows; // Return the 10 most paired products (or an empty array if not found)
+}

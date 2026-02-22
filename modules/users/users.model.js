@@ -119,3 +119,44 @@ exports.getUsersWithGamingProductsButNoHomeProducts = async () => {
     );
     return rows; // Return all users with gaming products but no home products (or an empty array if not found)
 }
+//Level 4 Assignment
+exports.getUsersWithAboveAverageSpending = async () => {
+    const [rows] = await db.query(`
+        SELECT u.name, u.email, SUM(o.total) AS total_spent
+        FROM users u
+        INNER JOIN orders o ON u.id = o.user_id
+        GROUP BY u.id, u.name, u.email
+        HAVING total_spent > (
+        SELECT AVG(total) 
+        FROM (SELECT SUM(o.total) AS total
+        FROM orders o 
+        GROUP BY o.user_id) AS general_average_subquery)
+        ORDER BY total_spent DESC;
+    `);
+    return rows; // Return all users with above average spending (or an empty array if not found)
+}
+exports.getInactiveInLastSixMonths = async () => {
+    const [rows] = await db.query(`
+        SELECT u.name, u.email, u.city, MAX(o.order_date) AS last_purchase, ROUND(DATEDIFF(NOW(), MAX(o.order_date))/30,0) AS months_without_buying 
+        FROM users u 
+        INNER JOIN orders o ON o.user_id = u.id 
+        GROUP BY u.id, u.name, u.email, u.city 
+        HAVING MAX(o.order_date) < DATE_SUB(NOW(), INTERVAL 6 MONTH) 
+        ORDER BY last_purchase ASC;
+        `);
+    return rows; // Return all users that have been inactive in the last six months (or an empty array if not found)
+}
+exports.getVipFrequentAndRegularCustomers = async () => {
+    const [rows] = await db.query(`
+        SELECT u.name, u.email, SUM(o.total) AS total_expense, 
+        CASE 
+        	WHEN SUM(o.total) > 5000 THEN 'VIP' 
+            WHEN SUM(o.total) BETWEEN 1000 AND 5000 THEN 'Frecuente' 
+        ELSE 'Regular' END AS level_users 
+        FROM users u 
+        INNER JOIN orders o ON o.user_id = u.id 
+        GROUP BY u.id, u.name, u.email 
+        ORDER BY total_expense DESC;
+        `);
+    return rows; // Return all users with their total expense and level (VIP, Frequent or Regular) (or an empty array if not found) 
+}

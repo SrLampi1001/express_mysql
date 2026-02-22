@@ -87,3 +87,20 @@ exports.getOrderWithMostProductVariety = async (req, res, next)=>{
       next(error);
     }
 }
+//Level 4 Assignment
+exports.getPendingOrdersWithProductsHavingLessThanFiveStock = async (req, res, next)=>{
+    try{
+        const orders = await service.getPendingOrdersWithProductsHavingLessThanFiveStock();
+        res.json(orders);
+    } catch (error){
+        next(error);
+    }
+}
+exports.getPercentageOfOrdersCancelledPerMonth = async (req, res, next)=>{
+    try{
+        const percentages = await service.getPercentageOfOrdersCancelledPerMonth();
+        res.json(percentages);
+    } catch (error){
+        next(error);
+    }
+}

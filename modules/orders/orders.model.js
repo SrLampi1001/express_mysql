@@ -81,3 +81,29 @@ exports.getOrderWithMostProductVariety = async ()=>{
     `);
     return rows[0]; // Return the order with most product variety (or undefined if not found)
 }
+//Level 4 Assignment
+exports.getPendingOrdersWithProductsHavingLessThanFiveStock = async ()=>{
+    const [rows] = await db.query(`
+        SELECT o.order_number, o.status AS order_status, u.name AS client, p.name AS product, op.quantity AS product_in_order, p.stock AS product_in_stock
+        FROM orders o 
+        INNER JOIN order_product op ON op.order_id  = o.id 
+        INNER JOIN products p ON p.id = op.product_id 
+        INNER JOIN users u ON u.id = o.user_id 
+        WHERE o.status  = 'pending' AND p.stock < 5 
+        ORDER BY p.stock ASC, o.order_date ASC;
+        `);
+    return rows; // Return all pending orders with products having less than 5 stock (or an empty array if not found)
+}
+exports.getPercentageOfOrdersCancelledPerMonth = async ()=>{
+    const [rows] = await db.query(`
+        SELECT DATE_FORMAT(order_date, '%Y-%m') AS period, COUNT(*) AS orders_total, 
+        SUM(
+        	CASE WHEN status = 'cancelled' THEN 1 ELSE 0 END) AS orders_cancelled, 
+        	ROUND(SUM(
+            CASE WHEN status = 'cancelled' THEN 1 ELSE 0 END) / COUNT(*) * 100, 2) AS cancellations_percentage
+        FROM orders o 
+        GROUP BY period
+        ORDER BY period DESC;
+        `);
+    return rows; // Return the percentage of orders cancelled per month (or an empty array if not found)
+}

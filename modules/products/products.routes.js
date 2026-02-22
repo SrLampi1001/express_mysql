@@ -22,5 +22,7 @@ router.get('/lastSaleDate/:productId', productsController.getProductLastSaleDate
 router.get('/noSales', productsController.getProductsWIthNoSales); //This route will return all products that have no sales, currently it returns nothing because all products have sales
 router.get('/soldCheaper', productsController.getProductsSoldCheaperThanCurrentPrice); //This route will return all products that have been sold at least once for a price lower than their current price, currently it returns nothing because no products have been sold cheaper than their current price
 router.get('/buyers/:productId', productsController.getProductBuyers); 
-
+//Level 4 Assignment
+router.get('/stairProducts', productsController.getStairProducts); //This route will return all products that represent more than 2% of the total company revenue, currently it returns nothing because no products represent more than 2% of the total company revenue
+router.get('/mostPaired', productsController.getMostPairedProducts);
 module.exports = router;

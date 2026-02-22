@@ -51,3 +51,14 @@ exports.getOrderWithMostProductVariety = async ()=>{
     if(!order) throw new Error("No orders found")
     return order;
 }
+//Level 4 Assignment
+exports.getPendingOrdersWithProductsHavingLessThanFiveStock = async ()=>{
+    const orders = await model.getPendingOrdersWithProductsHavingLessThanFiveStock();
+    if(orders.length === 0) throw new Error("No pending orders with products having less than five stock found")
+    return orders;
+}
+exports.getPercentageOfOrdersCancelledPerMonth = async ()=>{
+    const percentages = await model.getPercentageOfOrdersCancelledPerMonth();
+    if(percentages.length === 0) throw new Error("No orders found")
+    return percentages;
+}

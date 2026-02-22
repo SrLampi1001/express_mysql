@@ -21,5 +21,9 @@ router.get('/averageOrderValue/:id', usersController.getUserAverageOrderValue);
 //Level 3 Assignment
 router.get('/yearBestCustomer', usersController.getYearBestCustomer);
 router.get('/gamingNoHome', usersController.getUsersWithGamingProductsButNoHomeProducts);
+//Level 4 Assignment
+router.get('/aboveAverageSpending', usersController.getUsersWithAboveAverageSpending);
+router.get('/inactiveInLastSixMonths', usersController.getInactiveInLastSixMonths);
+router.get('/VipFrecuentAndRegular', usersController.getVipFrequentAndRegularCustomers);
 
 module.exports = router;

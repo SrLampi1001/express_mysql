@@ -18,5 +18,9 @@ router.get('/cities-revenue-clothes-category', reportsController.getCitiesRevenu
 router.get('/city-revenue-clothes-category/:city', reportsController.getCityRevenueFromClothesCategory)
 router.get('/total-profit', reportsController.getTotalProfit)
 router.get('/three-most-profitable-cities', reportsController.getThreeMostProfitableCities)
+//Level 4 Assignment
+router.get('/most-revenue-month', reportsController.getMostRevenueMonth)
+router.get('/revenue-percentage-each-category', reportsController.getRevenuePercentageForEachCategory)
+router.get('/average-cities-revenue', reportsController.getCitiesAverageRevenue)
 
 module.exports = router;

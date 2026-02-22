@@ -121,3 +121,20 @@ exports.getProductBuyers = async (req, res, next)=>{
         next(error);
     }
 }
+//Level 4 Assignment
+exports.getStairProducts = async (req, res, next)=>{
+    try{
+        const products = await service.getStairProducts();
+        res.json(products);
+    } catch (error){
+        next(error);
+    }
+}
+exports.getMostpairedProducts = async (req, res, next)=>{
+    try{
+        const products = await service.getMostpairedProducts();
+        res.json(products);
+    } catch (error){
+        next(error);
+    }
+}
