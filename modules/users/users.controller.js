@@ -105,3 +105,28 @@ exports.getUsersWithGamingProductsButNoHomeProducts = async (req, res, next) => 
       next(error);
     }
 }
+//Level 4 Assignment
+exports.getUsersWithAboveAverageSpending = async (req, res, next) => {
+    try {
+      const users = await service.getUsersWithAboveAverageSpending();
+      res.json(users);
+    } catch (error) {
+      next(error);
+    }
+}
+exports.getInactiveInLastSixMonths = async (req, res, next) => {
+    try {
+      const users = await service.getInactiveInLastSixMonths();
+      res.json(users);
+    } catch (error) {
+      next(error);
+    }
+}
+exports.getVipFrequentAndRegularCustomers = async (req, res, next) => {
+    try {
+      const users = await service.getVipFrequentAndRegularCustomers();
+      res.json(users);
+    } catch (error) {
+      next(error);
+    }
+}

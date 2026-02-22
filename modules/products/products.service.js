@@ -70,3 +70,14 @@ exports.getProductBuyers = async (productId)=>{
     if(buyers.length === 0) throw new Error('No buyers found for this product');
     return buyers;
 }
+//Level 4 Assignment
+exports.getStairProducts = async ()=>{
+    const products = await model.getStairProducts();
+    if(products.length === 0) throw new Error('No stair products found');
+    return products;
+}
+exports.getMostPairedProducts = async ()=>{
+    const products = await model.getMostPairedProducts();
+    if(products.length === 0) throw new Error('No paired products found');
+    return products;
+}

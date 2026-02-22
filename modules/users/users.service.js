@@ -61,3 +61,19 @@ exports.getUsersWithGamingProductsButNoHomeProducts = async ()=>{
     if(users.length === 0) throw new Error('No users found with gaming products but no home products');
     return users;
 }
+//Level 4 Assignment
+exports.getUsersWithAboveAverageSpending = async ()=>{
+    const users = await model.getUsersWithAboveAverageSpending();
+    if(users.length === 0) throw new Error('No users found with above average spending');
+    return users;
+}
+exports.getInactiveInLastSixMonths = async ()=>{
+    const users = await model.getInactiveInLastSixMonths();
+    if(users.length === 0) throw new Error('No inactive users found in the last six months');
+    return users;
+}
+exports.getVipFrequentAndRegularCustomers = async ()=>{
+    const users = await model.getVipFrequentAndRegularCustomers();
+    if(users.length === 0) throw new Error('No VIP, frequent or regular customers found');
+    return users;
+}

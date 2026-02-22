@@ -92,3 +92,28 @@ exports.getThreeMostProfitableCities = async (req, res, next)=>{
         next(error);
     }
 }
+//Level 4 Assignment
+exports.getMostRevenueMonth = async (req, res, next)=>{
+    try{
+        const month = await service.getMostRevenueMonth();
+        res.json(month);
+    } catch (error) {
+        next(error);
+    }
+}
+exports.getRevenuePercentageForEachCategory = async (req, res, next)=>{
+    try{
+        const revenues = await service.getRevenuePercentageForEachCategory();
+        res.json(revenues);
+    } catch (error) {
+        next(error);
+    }
+}
+exports.getCitiesAverageRevenue = async (req, res, next)=>{
+    try{
+        const revenues = await service.getCitiesAverageRevenue();
+        res.json(revenues);
+    } catch (error) {
+        next(error);
+    }
+}

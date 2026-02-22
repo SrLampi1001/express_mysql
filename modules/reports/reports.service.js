@@ -56,3 +56,19 @@ exports.getThreeMostProfitableCities = async () => {
     if(cities.length === 0) throw new Error("No profit data found for cities");
     return cities;
 }
+//Level 4 Assignment
+exports.getMostRevenueMonth = async () => {
+    const month = await model.getMostRevenueMonth();
+    if(month.length === 0) throw new Error("No revenue data found for months");
+    return month[0];
+}
+exports.getRevenuePercentageForEachCategory = async () => {
+    const revenues = await model.getRevenuePercentageForEachCategory();
+    if(revenues.length === 0) throw new Error("No revenue data found for categories");
+    return revenues;
+}
+exports.getCitiesAverageRevenue = async () => {
+    const revenues = await model.getCitiesAverageRevenue();
+    if(revenues.length === 0) throw new Error("No revenue data found for cities");
+    return revenues;
+}
