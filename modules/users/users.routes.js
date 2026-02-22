@@ -18,5 +18,8 @@ router.get('/cityWithOrders/:city', usersController.getUsersFromCityWithOrders);
 router.get('/gamerProducts', usersController.getUsersWithGamerProducts); //This route will return all users that have at least one product with "Gamer" in its name in their orders, currently it returns nothing
 router.get('/averageOrderValue', usersController.getUsersAverageOrderValue); 
 router.get('/averageOrderValue/:id', usersController.getUserAverageOrderValue);
+//Level 3 Assignment
+router.get('/yearBestCustomer', usersController.getYearBestCustomer);
+router.get('/gamingNoHome', usersController.getUsersWithGamingProductsButNoHomeProducts);
 
 module.exports = router;

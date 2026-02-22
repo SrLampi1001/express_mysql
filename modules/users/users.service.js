@@ -50,3 +50,14 @@ exports.getUserAverageOrderValue = async (id)=>{
     if(!user) throw new Error('User not found');
     return user;
 }
+//Level 3 Assignment
+exports.getYearBestCustomer = async ()=>{
+    const user = await model.getYearBestCustomer();
+    if(!user) throw new Error('No best customer found for this year');
+    return user;
+}
+exports.getUsersWithGamingProductsButNoHomeProducts = async ()=>{
+    const users = await model.getUsersWithGamingProductsButNoHomeProducts();
+    if(users.length === 0) throw new Error('No users found with gaming products but no home products');
+    return users;
+}

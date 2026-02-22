@@ -50,3 +50,45 @@ exports.getCategoriesWithNoSales = async (req, res, next)=>{
         next(error);
     }
 }
+//Level 3 Assignment
+exports.getGlobalReports = async (req, res, next)=>{
+    try{
+        const reports = await service.getGlobalReports();
+        res.json(reports);
+    } catch (error) {
+        next(error);
+    }
+}
+exports.getCitiesRevenueFromClothesCategory = async (req, res, next)=>{
+    try{
+        const revenues = await service.getCitiesRevenueFromClothesCategory();
+        res.json(revenues);
+    } catch (error) {
+        next(error);
+    }
+}
+exports.getCityRevenueFromClothesCategory = async (req, res, next)=>{
+    try{
+        const {city} = req.params;
+        const revenue = await service.getCityRevenueFromClothesCategory(city);
+        res.json(revenue);
+    } catch (error) {
+        next(error);
+    }
+}
+exports.getTotalProfit = async (req, res, next)=>{
+    try{
+        const profit = await service.getTotalProfit();
+        res.json(profit);
+    } catch (error) {
+        next(error);
+    }
+}
+exports.getThreeMostProfitableCities = async (req, res, next)=>{
+    try{
+        const cities = await service.getThreeMostProfitableCities();
+        res.json(cities);
+    } catch (error) {
+        next(error);
+    }
+}

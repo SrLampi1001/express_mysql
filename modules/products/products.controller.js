@@ -95,3 +95,29 @@ exports.getProductLastSaleDate = async (req, res, next)=>{
         next(error);
     }
 }
+//Level 3 Assignment
+exports.getProductsWIthNoSales = async (req, res, next)=>{
+    try{
+        const products = await service.getProductsWIthNoSales();
+        res.json(products);
+    } catch (error){
+        next(error);
+    }
+}
+exports.getProductsSoldCheaperThanCurrentPrice = async (req, res, next)=>{
+    try{
+        const products = await service.getProductsSoldCheaperThanCurrentPrice();
+        res.json(products);
+    } catch (error){
+        next(error);
+    }
+}
+exports.getProductBuyers = async (req, res, next)=>{
+    try{
+        const { productId } = req.params;
+        const buyers = await service.getProductBuyers(productId);
+        res.json(buyers);
+    } catch (error){
+        next(error);
+    }
+}

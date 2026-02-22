@@ -45,3 +45,9 @@ exports.getProductsFromCancelledOrders = async ()=>{
     if(products.length === 0) throw new Error("No cancelled orders found")
     return products;
 }
+//Level 3 Assignment
+exports.getOrderWithMostProductVariety = async ()=>{
+    const order = await model.getOrderWithMostProductVariety();
+    if(!order) throw new Error("No orders found")
+    return order;
+}

@@ -65,3 +65,60 @@ exports.getCategoriesWithNoSales = async () => {
     `);
     return rows; // Return all categories with no sales (or an empty array if not found)
 }
+//Level 3 Assignment
+exports.getGlobalReports = async () => {
+    const [rows] = await db.query(`
+        SELECT u.id, u.name, u.city, o.order_number, p.name AS name_product, c.name AS Category, op.quantity, (op.price_at_purchase * op.quantity) AS subtotal_item 
+        FROM users u 
+        LEFT JOIN orders o  ON o.user_id = u.id 
+        LEFT JOIN order_product op ON op.order_id  = o.id 
+        LEFT JOIN products p ON p.id = op.product_id 
+        LEFT JOIN categories c ON c.id = p.category_id 
+        ORDER BY u.id ASC;
+        `);
+    return rows; // Return a global report with all the data (or an empty array if not found)
+}
+exports.getCitiesRevenueFromClothesCategory = async () => {
+    const [rows] = await db.query(`
+       SELECT u.city AS City_name, c.name AS Category, SUM(op.price_at_purchase * op.quantity) AS products_total_revenue 
+        FROM categories c 
+        INNER JOIN products p ON c.id = p.category_id 
+        INNER JOIN order_product op ON op.product_id = p.id 
+        INNER JOIN orders o ON o.id = op.order_id
+        INNER JOIN users u ON u.id = o.user_id
+        WHERE c.id = 6  -- Assuming this ID correspond to clothes category
+        GROUP BY u.city`);
+    return rows; // Return the total revenue from the "Clothes" category for each city (or an empty array if not found)
+}
+exports.getCityRevenueFromClothesCategory = async (city) => {
+    const [rows] = await db.query(`
+        SELECT u.city AS City_name, c.name AS Category, SUM(op.price_at_purchase * op.quantity) AS products_total_revenue
+        FROM categories c
+        INNER JOIN products p ON c.id = p.category_id
+        INNER JOIN order_product op ON op.product_id = p.id
+        INNER JOIN orders o ON o.id = op.order_id
+        INNER JOIN users u ON u.id = o.user_id
+        WHERE c.id = 6 AND u.city = ?`, [city]);
+    return rows[0]; // Return the total revenue from the "Clothes" category for the city (or undefined if not found)
+}
+exports.getTotalProfit = async () => {
+    const [rows] = await db.query(`
+        SELECT SUM((op.price_at_purchase - p.purchase_price) * op.quantity) AS total_profit
+        FROM order_product op
+        INNER JOIN products p ON op.product_id = p.id
+    `);
+    return rows[0]; // Return the total profit (or undefined if not found)
+}
+exports.getThreeMostProfitableCities = async () => {
+    const [rows] = await db.query(`
+        SELECT u.city AS City_name, SUM((op.price_at_purchase - p.purchase_price) * op.quantity) AS total_profit
+        FROM order_product op
+        INNER JOIN products p ON op.product_id = p.id
+        INNER JOIN orders o ON o.id = op.order_id
+        INNER JOIN users u ON u.id = o.user_id
+        GROUP BY u.city
+        ORDER BY total_profit DESC
+        LIMIT 3;
+    `);
+    return rows; // Return the three most profitable cities (or an empty array if not found)
+}

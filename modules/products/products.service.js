@@ -54,3 +54,19 @@ exports.getProductLastSaleDate = async (productId)=>{
     if(!product) throw new Error('No product found with this id');
     return product;
 }
+//Level 3 Assignment
+exports.getProductsWIthNoSales = async ()=>{
+    const products = await model.getProductsWIthNoSales();
+    if(products.length === 0) throw new Error('No products found with no sales');
+    return products;
+}
+exports.getProductsSoldCheaperThanCurrentPrice = async ()=>{
+    const products = await model.getProductsSoldCheaperThanCurrentPrice();
+    if(products.length === 0) throw new Error('No products found sold cheaper than current price');
+    return products;
+}
+exports.getProductBuyers = async (productId)=>{
+    const buyers = await model.getProductBuyers(productId);
+    if(buyers.length === 0) throw new Error('No buyers found for this product');
+    return buyers;
+}

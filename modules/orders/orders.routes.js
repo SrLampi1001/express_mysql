@@ -17,4 +17,6 @@ router.get('/receipts', ordersController.getOrdersReceipt);
 router.get('/receipt/:orderId', ordersController.getOrderReceipt);
 router.get('/cancelledProducts', ordersController.getProductsFromCancelledOrders);
 //Level 3 Assignment
+router.get('/mostProductVariety', ordersController.getOrderWithMostProductVariety);
+
 module.exports = router;
