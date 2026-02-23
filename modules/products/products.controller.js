@@ -88,8 +88,8 @@ exports.getProductsLastSaleDate = async (req, res, next)=>{
 }
 exports.getProductLastSaleDate = async (req, res, next)=>{
     try{
-        const { productId } = req.params;
-        const product = await service.getProductLastSaleDate(productId);
+        const { id } = req.params;
+        const product = await service.getProductLastSaleDate(id);
         res.json(product);
     } catch (error){
         next(error);
@@ -114,8 +114,8 @@ exports.getProductsSoldCheaperThanCurrentPrice = async (req, res, next)=>{
 }
 exports.getProductBuyers = async (req, res, next)=>{
     try{
-        const { productId } = req.params;
-        const buyers = await service.getProductBuyers(productId);
+        const { id } = req.params;
+        const buyers = await service.getProductBuyers(id);
         res.json(buyers);
     } catch (error){
         next(error);

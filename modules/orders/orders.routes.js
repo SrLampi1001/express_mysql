@@ -14,7 +14,7 @@ router.get('/withEmail', ordersController.getAllOrdersWithUserEmail);
 router.get('/countByStatus', ordersController.getCountOrdersByStatus);
 //Level 2 Assignment
 router.get('/receipts', ordersController.getOrdersReceipt);
-router.get('/receipt/:orderId', ordersController.getOrderReceipt);
+router.get('/receipt/:id', ordersController.getOrderReceipt);
 router.get('/cancelledProducts', ordersController.getProductsFromCancelledOrders);
 //Level 3 Assignment
 router.get('/mostProductVariety', ordersController.getOrderWithMostProductVariety);
