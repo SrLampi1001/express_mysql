@@ -10,7 +10,7 @@ router.get('/:id', ordersController.getOrderById);
 router.get('/user/:userId', ordersController.getOrdersByUserId);
 router.get('/orderNumber/:orderNumber', ordersController.getOrderByOrderNumber);
 //Level 1 Assignment
-router.get('/withEmail', ordersController.getAllOrdersWithUserEmail);
+router.get('/withEmail/:email', ordersController.getAllOrdersWithUserEmail);
 router.get('/countByStatus', ordersController.getCountOrdersByStatus);
 //Level 2 Assignment
 router.get('/receipts', ordersController.getOrdersReceipt);
